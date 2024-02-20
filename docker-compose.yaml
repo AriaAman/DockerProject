@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  symfony:
+    image: wardark/symfony-alpine
+    volumes:
+      - ./symfony:/mon_projet
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    networks:
+      - backend
+
+  composer:
+    image: wardark/composer-alpine
+    volumes:
+      - ./symfony/:/volume/mon_projet
+    networks:
+      - backend
+
+  adminer:
+    image: moussastraore/adminer-alpine
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    networks:
+      - backend
+
+networks:
+  backend:
+    external: true
