@@ -31,4 +31,4 @@ RUN composer require symfony/maker-bundle
 
 
 WORKDIR /volume/mon_projet
-CMD ["cp", "-R", "/mon_projet/", "/volume","php-fpm"]
+CMD ["cp", "-R", "/mon_projet/", "/volume"]
