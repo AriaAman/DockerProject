@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   symfony:
-    image: wardark/symfony-alpine
+    build:
+      context: ./symfony
+    image: wardark/symfony-alpine:latest
     volumes:
       - ./symfony:/mon_projet
     ports:
@@ -11,16 +13,22 @@ services:
       - postgres
     networks:
       - backend
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-test}@postgres:5432/${POSTGRES_DB:-postgres}
 
   composer:
-    image: wardark/composer-alpine
+    build:
+      context: ./composer
+    image: wardark/composer-alpine:latest
     volumes:
       - ./symfony/:/volume/mon_projet
     networks:
       - backend
 
   adminer:
-    image: moussastraore/adminer-alpine
+    build:
+      context: ./adminer
+    image: moussastraore/adminer-alpine:latest
     ports:
       - "8080:80"
     depends_on:

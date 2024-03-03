@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   postgres:
-    image: samiassiakh/postgresql-alpine
+    build:
+      context: ./postgres
+    image: samiassiakh/postgresql-alpine:latest
     environment:
       POSTGRES_PASSWORD: test
     ports:
@@ -11,6 +13,7 @@ services:
       - db_data:/var/lib/postgresql/data
     networks:
       - backend
+
 
 volumes:
   db_data:
