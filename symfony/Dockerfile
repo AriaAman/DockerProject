@@ -5,17 +5,19 @@ FROM alpine
 #  pour etre sur de mettre a jour la machine
 RUN apk update && apk upgrade
 
-RUN apk add php
-RUN apk add php-dom
-RUN apk add php-iconv
-RUN apk add php-ctype
-RUN apk add php-session
-RUN apk add php-simplexml
-RUN apk add php-tokenizer
-RUN apk add php-pdo
-RUN apk add php-pdo_pgsql
-RUN apk add --no-cache bash
-RUN apk add --no-cache curl
+RUN apk add --no-cache \
+    php \
+    php-dom \
+    php-iconv \
+    php-ctype \
+    php-session \
+    php-simplexml \
+    php-tokenizer \
+    php-pdo \
+    php-pdo_pgsql \
+    bash \
+    curl
+#setup symfony pour alpine
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash
 RUN apk add symfony-cli
 
